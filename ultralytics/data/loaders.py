@@ -158,14 +158,14 @@ class LoadStreams:
         images = []
         for i, x in enumerate(self.imgs):
             # Wait until a frame is available in each buffer
-            while not x:
-                if not self.threads[i].is_alive() or cv2.waitKey(1) == ord("q"):  # q to quit
-                    self.close()
-                    raise StopIteration
-                time.sleep(1 / min(self.fps))
-                x = self.imgs[i]
-                if not x:
-                    LOGGER.warning(f"WARNING ⚠️ Waiting for stream {i}")
+            #while not x:
+            if not self.threads[i].is_alive() or cv2.waitKey(1) == ord("q"):  # q to quit
+                self.close()
+                raise StopIteration
+            #time.sleep(1 / min(self.fps))
+            #x = self.imgs[i]
+            if not x:
+                LOGGER.warning(f"WARNING ⚠️ Waiting for stream {i}")
 
             # Get and remove the first frame from imgs buffer
             if self.buffer:
